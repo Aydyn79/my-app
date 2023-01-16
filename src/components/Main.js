@@ -4,7 +4,7 @@ import Menu from './MenuComponent';
 import DishDetail from './DishDetail';
 import { DISHES } from '../shared/dishes';
 import ModalWindow from './Modal/Modal';
-import { createContext, useContext } from "react";
+
 
 export default function Main() {
   const [dishes, setDishes] = useState([]);
@@ -18,8 +18,6 @@ export default function Main() {
         setSelectedDish(dishId);
         console.log(selectedDish)
       }
-
-  const dishContext = createContext()
 
   return (
     <div>
