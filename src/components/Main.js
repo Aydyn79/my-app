@@ -28,13 +28,8 @@ export default function Main() {
         </Navbar>
         
         <Menu dishes={dishes} onClick={(dishId) => {onDishSelect(dishId);setShow(true);console.log(dishId)}} />
-        {/*<DishDetail dish={dishes.filter((dish) => dish.id === selectedDish)[0]} 
-        onClose={() => setShow(false)} 
-        show={show} />
-        */}
         <ModalWindow onClose={() => setShow(false)} show={show} >
           <DishDetail dish={dishes.filter((dish) => dish.id === selectedDish)[0]}/>
-          
         </ModalWindow>
         
     </div>
