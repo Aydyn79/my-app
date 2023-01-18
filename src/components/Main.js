@@ -6,7 +6,8 @@ import { DISHES } from '../shared/dishes';
 import ModalWindow from './Modal/Modal';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
-
+import Home from './HomeComponent';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 export default function Main() {
   const [dishes, setDishes] = useState([]);
@@ -21,20 +22,21 @@ export default function Main() {
         console.log(selectedDish)
       }
 
+
+
   return (
-    <div>
-        {/*<Navbar dark color='primary'>
-            <div className='container'>
-            <NavbarBrand href='/'>Ristorante con Fusions</NavbarBrand>
-            </div>
-          </Navbar>*/}
+    <>
         <Header />
-        <Menu dishes={dishes} onClick={(dishId) => {onDishSelect(dishId);setShow(true);console.log(dishId)}} />
-        <ModalWindow onClose={() => setShow(false)} show={show} >
+        <Routes>
+          <Route path='/home' element={<Home />} />
+          <Route exact path='/menu' element={<Menu dishes={dishes} />} />
+          <Route path="*" element={<Navigate replace to="/home" />} />
+        </Routes>
+        {/* <ModalWindow onClose={() => setShow(false)} show={show} >
           <DishDetail dish={dishes.filter((dish) => dish.id === selectedDish)[0]}/>
-        </ModalWindow>
+        </ModalWindow> */}
         <Footer /> 
-    </div>
+    </>
   );
 }
 
