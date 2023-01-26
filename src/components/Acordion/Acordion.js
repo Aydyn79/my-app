@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineMinusSquare, AiOutlinePlusSquare } from 'react-icons/ai'
 import './acordion.css'
-import { DATAACORDION } from '../../shared/data_acordion';
+// import { DATAACORDION } from '../../shared/data_acordion';
 
 
 const AcordionItem = ({ title, info }) => {
@@ -30,7 +30,7 @@ export default function Acordion() {
     const [descriptions, setDescriptions] = useState([])
 
     useEffect(() => {
-        setDescriptions(DATAACORDION);
+        // setDescriptions(DATAACORDION);
     }, []);
     return (
         <main>
