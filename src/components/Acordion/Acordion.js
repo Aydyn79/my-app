@@ -13,7 +13,7 @@ const AcordionItem = ({ title, info }) => {
                 <h3 className="mb-0">
                     {title}
                 </h3>
-                <button className='btn' onClick={() => setExpanded(!expanded)}>
+                <button className='btn1' onClick={() => setExpanded(!expanded)}>
                     {expanded ? <AiOutlineMinusSquare /> : <AiOutlinePlusSquare />}
                 </button>
             </div>
