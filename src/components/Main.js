@@ -15,7 +15,7 @@ import Contact from './ContactComponent';
 import AboutUs from './AboutUsComponent';
 import { connect } from 'react-redux';
 import { withRouter } from '../utils/wr';
-import { addComment } from './redux/ActionCreators';
+import { addComment, fetchDishes } from './redux/ActionCreators';
 
 const mapStateToProps = state => {
   return {
@@ -27,31 +27,23 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  
-  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
-
+  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+  fetchDishes: () => { dispatch(fetchDishes())}
 });
 
 const Main = (props) => {
-  // const [dishes, setDishes] = useState([]);
-  // const [comments, setComments] = useState([]);
-  // const [promotions, setPromotions] = useState([]);
-  // const [leaders, setLeaders] = useState([]);
-  // const [selectedDish, setSelectedDish] = useState(null);
   
-  // useEffect(() => {
-  //       setDishes(DISHES);
-  //       setComments(COMMENTS);
-  //       setPromotions(PROMOTIONS);
-  //       setLeaders(LEADERS);
-  //   }, []);
-
+  useEffect(() => {
+    props.fetchDishes();
+    }, []);
 
 
   const DishWithId = () => {
         let id = useParams().dishId
         return(
-              <DishDetail dish={props.dishes.filter((dish) => dish.id === Number(id))[0]}
+              <DishDetail dish={props.dishes.dishes.filter((dish) => dish.id === Number(id))[0]}
+              isLoading={props.dishes.isLoading}
+              errMess={props.dishes.errMess}
               comments={props.comments.filter((comment) => comment.dishId === Number(id))}
               addComment={props.addComment}
               />
@@ -63,7 +55,9 @@ const Main = (props) => {
         <Header />
         <Routes>
           <Route path='/home' element={<Home 
-          dish={props.dishes.filter((dish) => dish.featured)[0]}
+          dish={props.dishes.dishes.filter((dish) => dish.featured)[0]}
+          dishesLoading={props.dishes.isLoading}
+          dishesErrMess={props.dishes.errMess}
           promotion={props.promotions.filter((promo) => promo.featured)[0]}
           leader={props.leaders.filter((leader) => leader.featured)[0]}
           />} />

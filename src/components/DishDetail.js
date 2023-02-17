@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import ModalWindow from "./Modal/Modal";
 import AddComment from "./AddComment";
-
+import { Loading } from './LoadingComponent';
 
 
 function RenderDish({dish}) {
@@ -37,8 +37,25 @@ function RenderComments({comments}) {
 export default function DishDetail(props) {
     const [show, setShow] = useState(false);
     const dish = props.dish
-    if (!dish){return(<div>А вы ничего не выбрали</div>)}
-    
+    if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (dish != null){
     return (
         <div className="container">
             <div className="row">
@@ -66,5 +83,5 @@ export default function DishDetail(props) {
                 dishId={props.dish.id}
                 />
             </ModalWindow>
-        </div>)
+        </div>)}
 }
